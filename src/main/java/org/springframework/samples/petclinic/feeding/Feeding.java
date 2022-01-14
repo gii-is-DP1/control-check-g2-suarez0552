@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -22,19 +23,19 @@ import lombok.Setter;
 @Entity
 public class Feeding extends BaseEntity {
 
-    @NotNull
+    @NotBlank
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Column(name = "start_date")
     private LocalDate startDate;
 
-    @NotNull
+    @NotBlank
     @Positive
     @Column(name = "weeks_duration")
     private Double weeksDuration;
 
     @ManyToOne
     @JoinColumn(name = "pet_id")
-    @NotEmpty
+    @NotBlank
     @NotNull
     private Pet pet;  
 
@@ -42,9 +43,6 @@ public class Feeding extends BaseEntity {
     @JoinColumn(name = "feeding_type")
     private FeedingType feedingType;
     
-    public void setWeeksDuration(int weeksDuration) {
-        this.weeksDuration = (double)weeksDuration;
-    }
 
     
 }
